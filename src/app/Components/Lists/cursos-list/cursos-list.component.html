@@ -1,0 +1,37 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Fecha de Inicio</th>
+      <th scope="col">Fecha de Fin</th>
+      <th scope="col"># Alumnos</th>
+      <th scope="col">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let curso of cursos; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      
+      <td>{{ curso.nombre }}</td>
+      <td>{{ curso.fecha_inicio | date }}</td>
+      <td>{{ curso.fecha_fin | date }}</td>
+      <td>{{ curso.cantidad_alumnos | number }}</td>
+      <td>
+        <button type="button" title="Ver Curso" class="btn btn-info btn-sm ver_button" routerLink="/cursos/ver/{{curso.curso_id}}"></button>
+        <button type="button" title="Modificar Curso" class="btn btn-info btn-sm modify_button" routerLink="/cursos/editar/{{curso.curso_id}}"></button>
+        <button type="button" title="Eliminar Curso" class="btn btn-danger btn-sm delete_button" (click)="delete(curso)"></button>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>
+        <button type="button" title="Agregar Curso" class="btn btn-info btn-sm add_button" routerLink="/cursos/nuevo"></button>
+      </td>
+    </tfoot>
+  </table>

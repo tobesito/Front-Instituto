@@ -1,0 +1,37 @@
+<table *ngIf="!loading" class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">N° Planilla</th>
+      <th scope="col">Curso</th>
+      <th scope="col">Profesor</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let planilla of planillas; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      
+      <td>{{ planilla.planilla_id }}</td>
+      <td>{{ planilla.curso.nombre }}</td>
+      <td>{{ planilla.curso.profesor.nombre }}</td>
+      <td>{{ planilla.fecha | date }}</td>
+      <td>
+        <button type="button" title="Ver Planilla" class="btn btn-info btn-sm ver_button" routerLink="/planillas/ver/{{planilla.planilla_id}}"></button>
+        <button type="button" title="Modificar Planilla" class="btn btn-info btn-sm modify_button" routerLink="/planillas/editar/{{planilla.planilla_id}}"></button>
+        <button type="button" title="Eliminar Planilla" class="btn btn-danger btn-sm delete_button" (click)="delete(planilla)"></button>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>
+        <button type="button" title="Agregar Alumno" class="btn btn-info btn-sm add_button" routerLink="/planillas/nueva"></button>
+      </td>
+    </tfoot>
+  </table>

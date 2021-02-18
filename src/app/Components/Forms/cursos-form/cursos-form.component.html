@@ -1,0 +1,75 @@
+<div class="form-container" *ngIf="!loading">
+    <h1 *ngIf="!modoEditar">Nuevo Curso</h1>
+    <h1 *ngIf="modoEditar">Editando Curso</h1>
+    <form [formGroup]="formulario" (ngSubmit)="onSaveForm()">
+
+        <p class="parrafo">Nombre</p>
+        <input type="text" formControlName="nombre">
+        <div class="alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div class="container-error-message" *ngIf="nombre.errors.required">
+                El campo nombre es requerido.
+            </div>
+            <div class="container-error-message" *ngIf="nombre.errors.minlength">
+                El campo nombre debe tener al menos 5 carácteres.
+            </div>
+        </div>
+
+        <p class="parrafo">Fecha de Inicio</p>
+        <input type="date" formControlName="fecha_inicio">
+        <div class="alert-danger" *ngIf="fecha_inicio.invalid && (fecha_inicio.dirty || fecha_inicio.touched)">
+            <div class="container-error-message" *ngIf="fecha_inicio.errors.required">
+                El campo Fecha de Inicio es requerido.
+            </div>
+        </div>
+
+        <p class="parrafo">Fecha de Fin</p>
+        <input type="date" formControlName="fecha_fin">
+        <div class="alert-danger" *ngIf="fecha_fin.invalid && (fecha_fin.dirty || fecha_fin.touched)">
+            <div class="container-error-message" *ngIf="fecha_fin.errors.required">
+                El campo Fecha de Fin es requerido.
+            </div>
+        </div>
+
+        <p class="parrafo">Cantidad de alumnos</p>
+        <input type="text" formControlName="cantidad_alumnos">
+        <div class="alert-danger" *ngIf="cantidad_alumnos.invalid && (cantidad_alumnos.dirty || cantidad_alumnos.touched)">
+            <div class="container-error-message" *ngIf="cantidad_alumnos.errors.required">
+                El campo Cantidad de alumnos es requerido.
+            </div>
+        </div>
+
+        <div>
+            <p class="parrafo">Profesor</p>
+            <select class="select-box" formControlName="profesor_id">
+                <option *ngFor="let profesor of profesores; index as i" [value]=profesor.profesor_id>
+                    {{ profesor.nombre }}, DNI: {{profesor.dni}}
+                </option>
+                <option *ngIf="profesor != null" [value]=profesor_id.value selected>{{profesor.value}}</option>
+            </select>
+            <div class="alert-danger" *ngIf="profesor_id.invalid && (profesor_id.dirty || profesor_id.touched)">
+                <div class="container-error-message" *ngIf="profesor_id.errors.required">
+                    El campo Profesor es requerido.
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <p class="parrafo">Profesor Auxiliar</p>
+            <select class="select-box" formControlName="profesor_auxiliar_id">
+                <option *ngFor="let profesor of profesores; index as i" [value]=profesor.profesor_id>
+                    {{ profesor.nombre }}, DNI: {{profesor.dni}}
+                </option>
+                <option *ngIf="profesor_auxiliar != null" [value]=profesor_auxiliar_id.value selected>{{profesor_auxiliar.value}}</option>
+            </select>
+        </div>
+
+        <div  *ngIf="formularioSucces" class="alert-succes" role="alert">
+            Curso {{modoEditar ? 'editado' : 'creado'}} correctamente!
+        </div>
+
+        <button type="button" class="btn-volver" (click)="volverAlListado()">Volver</button>
+
+        <button type="submit" class="btn-send" [disabled]=!formulario.valid>Guardar</button>
+        
+    </form>
+</div>

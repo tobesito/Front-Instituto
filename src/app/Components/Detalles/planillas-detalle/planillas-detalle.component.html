@@ -1,0 +1,64 @@
+<div class="container" *ngIf="!loading">
+    <div class="row">
+        <h1 class="col-11" style="text-align: center;"> Nombre Curso </h1>
+        <h4 class="col-1">#</h4>
+    </div>
+    <div class="row">
+        <h4 class="col-5">Profesor: {{planilla.curso.profesor.nombre}}</h4>
+        <h4 class="col-5">Auxiliar: {{planilla.curso.profesor_auxiliar != null ? planilla.curso.profesor_auxiliar.nombre : '-'}}</h4>
+        <h4 class="col-2"> Fecha: {{planilla.fecha | date }}</h4>
+    </div>
+    <div class="row">
+        <h4 class="col-12"> Alumnos</h4>
+    </div>
+    <div class="row" style="font-weight: bold; font-style: italic;">
+        <h5 class="col">#</h5>
+        <h5 class="col-2">Legajo</h5>
+        <h5 class="col-8">Nombre</h5>
+        <h5 class="col">Asistió</h5>
+    </div>
+
+    <div >
+        <div class="row" *ngFor="let asistencia of planilla.asistencias; index as i">
+            <div class="col">{{ i + 1 }}</div>
+            <div class="col-2">{{asistencia.alumno.legajo}}</div>
+            <div class="col-8">{{asistencia.alumno.nombre}}</div>
+            <div class="col">
+                <input  type="checkbox" [ngValue]="planilla.asistencias[i].asistio" [checked]="asistencia.asistio" onchec>
+                    <span> {{planilla.asistencias[i].asistio == true ? 'Si' : 'No'}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<!-- <div>
+    <div class="row">
+        <h1 class="col-10"> Nombre Curso </h1>
+        <h1 class="col-2">#</h1>
+    </div>
+    <div class="row">
+        <h4 class="col-4">Profesor: Nombre</h4>
+        <h4 class="col-4">Auxiliar: Nombre</h4>
+        <h4 class="col-4">Fecha: dd/mm/aaaa</h4>
+    </div>
+</div> -->
+
+<!-- <table class="table table-striped" *ngIf="!loading">
+    <thead>
+        <th scope="col">#</th>
+        <th scope="col">Profesor: Nombre</th>
+        <th scope="col">Auxiliar: Nombre</th>
+        <th scope="col">Fecha: dd/mm/aaaa</th>
+    </thead>
+
+    <tbody>
+
+    <tr scope="row" *ngFor="let asistencia of planilla.asistencias; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td scope="col-2">{{asistencia.alumno.legajo}}</td>
+      <td scope="col-8">{{asistencia.alumno.nombre}}</td>
+      <td scope="col">{{asistencia.asistio == true ? 'Si' : 'No'}}</td>
+    </tr>
+    </tbody>
+  </table> -->

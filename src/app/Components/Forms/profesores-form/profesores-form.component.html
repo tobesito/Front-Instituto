@@ -1,0 +1,45 @@
+<div class="form-container" *ngIf="!loading">
+    <h1 *ngIf="!modoEditar">Nuevo Profesor</h1>
+    <h1 *ngIf="modoEditar">Editando Profesor</h1>
+    <form [formGroup]="formulario" (ngSubmit)="onSaveForm()">
+
+        <p class="parrafo">Nombre</p>
+        <input type="text" formControlName="nombre">
+        <div class="alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div class="container-error-message" *ngIf="nombre.errors.required">
+                El campo nombre es requerido.
+            </div>
+            <div class="container-error-message" *ngIf="nombre.errors.minlength">
+                El campo nombre debe tener al menos 5 carácteres.
+            </div>
+        </div>
+
+        <p class="parrafo">Titulo</p>
+        <input type="text" formControlName="titulo">
+        <div class="alert-danger" *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)">
+            <div class="container-error-message" *ngIf="titulo.errors.required">
+                El campo titulo es requerido.
+            </div>
+            <div class="container-error-message" *ngIf="titulo.errors.minlength">
+                El campo titulo debe tener al menos 5 carácteres.
+            </div>
+        </div>
+
+        <p class="parrafo">Numero de documento</p>
+        <input type="text" formControlName="dni">
+        <div class="alert-danger" *ngIf="dni.invalid && (dni.dirty || dni.touched)">
+            <div class="container-error-message" *ngIf="dni.errors.required">
+                El campo dni es requerido.
+            </div>
+            <div class="container-error-message" *ngIf="dni.errors.minlength">
+                El campo dni debe tener al menos 5 carácteres.
+            </div>
+        </div>
+
+        <div  *ngIf="formularioSucces" class="alert-succes" role="alert">
+            Profesor {{modoEditar ? 'editado' : 'creado'}} correctamente!
+        </div>
+
+        <button type="submit" class="btn-send" [disabled]=!formulario.valid>Guardar</button>
+    </form>
+</div>

@@ -1,0 +1,120 @@
+<div class="form-container" *ngIf="!loading">
+    <h1 *ngIf="!modoEditar">Nuevo Alumno</h1>
+    <h1 *ngIf="modoEditar">Editando Alumno</h1>
+    <form [formGroup]="formulario" (ngSubmit)="onSaveForm()">
+
+        <p class="parrafo">Nombre</p>
+        <input type="text" formControlName="nombre">
+        <div class="alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div class="container-error-message" *ngIf="nombre.errors.required">
+                El campo nombre es requerido.
+            </div>
+            <div class="container-error-message" *ngIf="nombre.errors.minlength">
+                El campo nombre debe tener al menos 5 carácteres.
+            </div>
+        </div>
+
+        <p class="parrafo">Legajo</p>
+        <input type="text" formControlName="legajo">
+        <div class="alert-danger" *ngIf="legajo.invalid && (legajo.dirty || legajo.touched)">
+            <div class="container-error-message" *ngIf="legajo.errors.required">
+                El campo legajo es requerido.
+            </div>
+            <div class="container-error-message" *ngIf="legajo.errors.minlength">
+                El campo legajo debe tener al menos 5 carácteres.
+            </div>
+        </div>
+
+        <p class="parrafo">Numero de documento</p>
+        <input type="text" formControlName="dni">
+        <div class="alert-danger" *ngIf="dni.invalid && (dni.dirty || dni.touched)">
+            <div class="container-error-message" *ngIf="dni.errors.required">
+                El campo dni es requerido.
+            </div>
+            <div class="container-error-message" *ngIf="dni.errors.minlength">
+                El campo dni debe tener al menos 5 carácteres.
+            </div>
+        </div>
+
+        <!-- <p class="parrafo">Localidad</p>
+        <div class="autocomplete">
+            <ng-autocomplete    [data]="localidades"
+                                [searchKeyword]="keyword"
+                                [itemTemplate]="itemTemplate"
+                                [initialValue]=""
+                                formControlName="localidad"
+                >
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.Nombre" [value]=item.Nombre></a>
+            </ng-template>
+        </div> -->
+
+        <div  *ngIf="formularioSuccess" class="alert-succes" role="alert">
+            Alumno {{modoEditar ? 'editado' : 'creado'}} correctamente!
+        </div>
+
+        <button type="button" class="btn-volver" (click)="volverAlListado()">Volver</button>
+
+        <button type="submit" class="btn-send" [disabled]=!formulario.valid>Guardar</button>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form (ngSubmit)="guardarDatos()">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="alumno.nombre"
+            placeholder="Ej: Gustavo Damián Toobe" maxlength="32" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="legajo" class="form-label">Legajo</label>
+        <input type="text" class="form-control" name="legajo" id="legajo" [(ngModel)]="alumno.legajo"
+            laceholder="Ej: 00001">
+    </div>
+    <div class="mb-3">
+        <label for="dni" class="form-label">DNI</label>
+        <input type="number" class="form-control" name="dni" id="dni" [(ngModel)]="alumno.dni"
+            placeholder="Ej: 36910437" min="5000000" max="50000000" required>
+    </div>
+
+    <div *ngIf="alumnoSuccess" class="alert alert-success" role="alert">
+        Alumno {{modoEditar ? 'editado' : 'creado'}} correctamente!
+    </div>
+
+    <div>
+        <button class="btn btn-primary" type="submit" [disabled]="validarCampos()">Submit</button>
+    </div>
+
+</form> -->

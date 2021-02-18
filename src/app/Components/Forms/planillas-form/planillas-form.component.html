@@ -1,0 +1,37 @@
+<div class="form-container" *ngIf="!loading">
+    <h1 *ngIf="!modoEditar">Nueva Planilla</h1>
+    <h1 *ngIf="modoEditar">Editando Planilla</h1>
+    <form [formGroup]="formulario" (ngSubmit)="onSaveForm()">
+
+        <p class="parrafo" *ngIf="modoEditar">ID</p>
+        <input type="text" *ngIf="modoEditar" formControlName="planilla_id">
+
+        <p class="parrafo">Fecha</p>
+        <input type="date" formControlName="fecha">
+        <div class="alert-danger" *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)">
+            <div class="container-error-message" *ngIf="fecha.errors.required">
+                El campo fecha es requerido.
+            </div>
+        </div>
+            
+        <div>
+            <p class="parrafo">Curso</p>
+            <select class="select-box" formControlName="curso_id">
+                <option *ngFor="let curso of cursos; index as i" [value]=curso.curso_id>
+                   {{ curso.curso_id }} - {{curso.nombre}}
+                </option>
+                <option *ngIf="curso != null" [value]=curso_id.value selected>{{curso.value.curso_id}} - {{curso.value.nombre}}</option>
+            </select>
+            <!-- <button type="button" title="Ver Curso" class="btn btn-info btn-sm ver_button" routerLink="/cursos/ver/{{planilla_id.value}}/{{curso_id.value}}"></button> -->
+            <!-- <button type="button" title="Eliminar Curso" class="btn btn-danger btn-sm delete_button" (click)="delete(curso)" ></button> -->
+        </div>
+        
+        <div  *ngIf="formularioSuccess" class="alert-succes" role="alert">
+            Planilla {{modoEditar ? 'editada' : 'creada'}} correctamente!
+        </div>
+
+        <button type="button" class="btn-volver" (click)="volverAlListado()">Volver</button>
+
+        <button type="submit" class="btn-send" [disabled]=!formulario.valid>Guardar</button>
+    </form>
+</div>

@@ -1,0 +1,56 @@
+
+
+<div>
+    <label for="alumno" class="label_asistencias"> Cursos </label>
+    <select class="select_asistencias" [(ngModel)]="curso">
+        <option *ngFor="let curso of cursos; index as i" [ngValue]=curso>
+            {{ curso.curso_id }} - {{ curso.nombre }}
+        </option>
+    </select>
+
+    <label for="alumno" class="label_asistencias"> Alumno </label>
+    <select class="select_asistencias" name="alumno" [(ngModel)]="alumno">
+        <option *ngFor="let alumno of alumnos; index as i" [ngValue]=alumno>
+            {{ alumno.alumno_id }} - {{ alumno.nombre }}, Legajo: {{alumno.legajo}}
+        </option>
+    </select>
+
+    <label for="fecha" class="label_asistencias"> Fecha </label>
+    <input type="date" name="fecha" class="input_asistencia"  [(ngModel)]="fecha">
+
+    <button type="button" class="button_asistencia" (click)="buscarAsistencia()" title="Buscar asistencia"> Buscar </button>
+    <button type="button" class="button_asistencia" (click)="refrescarAsistencias()" title="Refrescar listado"> Refrescar </button>
+</div>
+<h4 class="mensaje_resultado" *ngIf="alumno != null && curso != null && fecha != null && !encontrado">
+    El alumno {{alumno.nombre}} no asistió en el curso {{curso.nombre}} en la fecha {{fecha}}
+</h4>
+
+<table class="table table-striped" *ngIf="!loading && encontrado">
+    
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Legajo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Asistio</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="planilla.asistencias != null">
+        <tr *ngFor="let asistencia of planilla.asistencias; index as i">
+            
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ asistencia.alumno.legajo }}</td>
+            <td>{{ asistencia.alumno.nombre }}</td>
+            <td>{{ asistencia.asistio }}</td>
+            <td>
+                <!-- <button type="button" title="Ver Asistencia" class="btn btn-info btn-sm ver_button"
+                    routerLink="/asistencias/ver/{{asistencia.asistencia_id}}"></button> -->
+                <!-- <button type="button" title="Modificar Asistencia" class="btn btn-info btn-sm modify_button"
+                    routerLink="/asistencias/editar/{{asistencia.asistencia_id}}"></button> -->
+                <!-- <button type="button" title="Eliminar Asistencia" class="btn btn-danger btn-sm delete_button"
+                    (click)="delete(asistencia)"></button> -->
+            </td>
+        </tr>
+    </tbody>
+</table>
